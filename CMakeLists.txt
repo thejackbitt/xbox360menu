@@ -10,7 +10,7 @@ add_executable(XboxUIPrototype WIN32
 
 target_include_directories(XboxUIPrototype PRIVATE src)
 
-target_link_libraries(XboxUIPrototype
+target_link_libraries(XboxUIPrototype    
     d3d11
     dxgi
     d3dcompiler
