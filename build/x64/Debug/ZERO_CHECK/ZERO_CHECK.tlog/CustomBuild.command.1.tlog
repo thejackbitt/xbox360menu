@@ -1,0 +1,10 @@
+^C:\USERS\JACKB\REPOSITORIES\XBOX360MENU\BUILD\CMAKEFILES\A1E84B6757D22D94D430D70258504170\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/jackb/Repositories/xbox360menu -BC:/Users/jackb/Repositories/xbox360menu/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/jackb/Repositories/xbox360menu/build/XboxUIPrototype.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
