@@ -4,9 +4,7 @@ project(XboxUIPrototype LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(XboxUIPrototype WIN32
-    src/main.cpp
-)
+add_executable(XboxUIPrototype src/main.cpp)
 
 target_include_directories(XboxUIPrototype PRIVATE src)
 

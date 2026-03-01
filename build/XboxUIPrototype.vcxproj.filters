@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\jackb\Repositories\xbox360menu\src\main.cpp">
+    <ClCompile Include="C:\Repositories\xbox360menu\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\jackb\Repositories\xbox360menu\CMakeLists.txt" />
+    <CustomBuild Include="C:\Repositories\xbox360menu\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{E4181708-93EF-3AFD-A53E-F901A734F33F}</UniqueIdentifier>
+      <UniqueIdentifier>{0C4E4AEB-3250-3421-B3F7-65D1B5F94C26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
