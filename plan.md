@@ -167,3 +167,6 @@ xbox360menu/
 
 ### Navigation
 Using left/right navigates between the items in the main array.  Using up/down navigates through the options in the active item in the main array.  Enter selects and esc navigates backward.  Picker types are sub pages that display only a list of options.
+
+### State Machine
+Pages are rendered from right to left and are resized and centered when active.  
