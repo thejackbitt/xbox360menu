@@ -9,9 +9,17 @@ void drawPage(
     int menuWidth,
     int menuHeight,
     char* label,
+    bool selected,
     TTF_Font* font
-
 ) {
-    drawGradientRect(renderer, menuPosX-(menuWidth/9), menuPosY, menuWidth/9, menuHeight, 100, {255, 255, 255, 255}, {224, 223, 222, 255}, 1);
-    drawText90(renderer, menuPosX-(menuWidth/9), menuPosY-(menuHeight*0.25), menuWidth/9, menuHeight, font, 25, {78, 81, 86}, label);
+    if(selected) {
+        drawGradientRect(renderer, menuPosX-(menuWidth/9), menuPosY, menuWidth/9, menuHeight, 100, {255, 255, 255, 255}, {224, 223, 222, 255}, 1);
+        drawText90(renderer, menuPosX-(menuWidth/9), menuPosY-(menuHeight*0.25), menuWidth/9, menuHeight, font, 25, {78, 81, 86}, label);
+        return;
+    }
+
+    drawGradientRect(renderer, menuPosX-(menuWidth/9), menuPosY, menuWidth/9, menuHeight, 100, {73, 87, 99, 255}, {66, 76, 86, 255}, 1);
+    drawText90(renderer, menuPosX-(menuWidth/9), menuPosY-(menuHeight*0.25), menuWidth/9, menuHeight, font, 25, {206, 215, 222}, label);
+
+    return;
 }

@@ -5,7 +5,7 @@
 #include <iostream>
 
 StateMachine::StateMachine(const Menu& menuInstance)
-    : currentState{menuInstance, 0, 0, 0, 0, 0.25f, Phase::Idle}, running(true)
+    : currentState{menuInstance, 0, 0, 0, 0, 0.25f, Phase::Opening}, running(true)
 {
 }
 
@@ -24,7 +24,6 @@ void StateMachine::handleEvent(const SDL_Event& event)
         // std::cout << "Page index: " << currentState.pageIndex << std::endl;
         // std::cout << "Option index: " << currentState.optionIndex << std::endl;
         // std::cout << "Sub-option index: " << currentState.subOptionIndex << std::endl;
-        int maxPageIndex = std::size(currentState.menu.pages);
         int maxOptionIndex = std::size(currentState.menu.pages[currentState.pageIndex].options);
         switch (event.key.keysym.sym) {
         case SDLK_UP:
@@ -34,10 +33,12 @@ void StateMachine::handleEvent(const SDL_Event& event)
             currentState.optionIndex = std::min(maxOptionIndex - 1, currentState.optionIndex + 1);
             break;
         case SDLK_LEFT:
-            currentState.pageIndex = std::max(0, currentState.pageIndex - 1);
+            currentState.phase = Phase::ShiftLeft;
+            currentState.time = 0;
             break;
         case SDLK_RIGHT:
-            currentState.pageIndex = std::min(maxPageIndex - 1, currentState.pageIndex + 1);
+            currentState.phase = Phase::ShiftRight;
+            currentState.time = 0;
             break;
         case SDLK_RETURN:
             // confirm/select action
@@ -64,6 +65,17 @@ void StateMachine::update(float dt)
         } else if(currentState.phase == Phase::Closing) {
             running = false;
         }
+        if(currentState.phase == Phase::ShiftRight) {
+            currentState.phase = Phase::Idle;
+            int maxPageIndex = std::size(currentState.menu.pages);
+            currentState.pageIndex = std::min(maxPageIndex - 1, currentState.pageIndex + 1);
+            currentState.time = 0;
+        }
+        if(currentState.phase == Phase::ShiftLeft) {
+            currentState.phase = Phase::Idle;
+            currentState.pageIndex = std::max(0, currentState.pageIndex - 1);
+            currentState.time = 0;
+        }        
     }
 }
 

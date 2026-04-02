@@ -6,6 +6,7 @@ The following packages are already installed:
   * freetype[core,zlib,png,bzip2,brotli]:x64-windows@2.13.2
   * libpng:x64-windows@1.6.43
     sdl2:x64-windows@2.30.0
+    sdl2-image:x64-windows@2.8.2
     sdl2-ttf:x64-windows@2.22.0
   * vcpkg-cmake:x64-windows@2023-05-04
   * vcpkg-cmake-config:x64-windows@2022-02-06#1
@@ -19,9 +20,14 @@ sdl2 provides CMake targets:
         $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
     )
 
+sdl2-image provides CMake targets:
+
+    find_package(SDL2_image CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
+
 sdl2-ttf provides CMake targets:
 
     find_package(SDL2_ttf CONFIG REQUIRED)
     target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>)
 
-All requested installations completed successfully in: 2.08 ms
+All requested installations completed successfully in: 3.87 ms

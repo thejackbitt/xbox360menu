@@ -128,3 +128,12 @@ Abi: 9b1fb09022048a9fc200f52d52d3c7f24234b03d28ce905055c5efb8214deb2f
 Description: A library for rendering TrueType fonts with SDL
 Status: install ok installed
 
+Package: sdl2-image
+Version: 2.8.2
+Depends: libpng, sdl2, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: c402da822b381e7282fbd8bf8fc72c4ded4f7a78c6c36924e94b941b8b34169e
+Description: SDL_image is an image file loading library. It loads images as SDL surfaces and textures, and supports the following formats: BMP, GIF, JPEG, LBM, PCX, PNG, PNM, TGA, TIFF, WEBP, XCF, XPM, XV
+Status: install ok installed
+

@@ -5,7 +5,8 @@ enum class Phase {
     Opening,
     PostOpening,
     Idle,
-    Update,
+    ShiftRight,
+    ShiftLeft,
     PreClosing,
     Closing
 };
