@@ -82,11 +82,17 @@ void renderMenu(
         if(state.phase == Phase::ShiftOut) {
             offset = -updateSize * (alpha) + updateSize;
         }
+        // assuming subOptionWindow is 3
+        // at frame 0, buttonOffset should be 100 and transitions to 150 when alpha is 1
+        // 150 * (0+x) = 100
+        // 150 * (1+x) = 150
         if(state.phase == Phase::ShiftUp) {
-            buttonOffset = (buttonSize*state.subOptionWindow[0]) * (alpha+state.subOptionWindow[0]+1);
+            buttonOffset = (((buttonSize*state.subOptionWindow[0]) * -1)) + (buttonSize * alpha);
         }
+        // assuming subOptionWindow is 3
+        // at frame 0, buttonOffset should be 200 and transitions to 150 when alpha is 1
         if(state.phase == Phase::ShiftDown) {
-            buttonOffset = (buttonSize*state.subOptionWindow[0]) * -(alpha+state.subOptionWindow[0]+1);
+            buttonOffset = (((buttonSize*state.subOptionWindow[0]) * -1)) - (buttonSize * alpha);
         }
         if(state.phase == Phase::InIdle || state.phase == Phase::InFadeIn) {
             buttonOffset = (buttonSize*state.subOptionWindow[0]) * -1;

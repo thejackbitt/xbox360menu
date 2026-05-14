@@ -10,7 +10,7 @@ StateMachine::StateMachine(const Menu& menuInstance)
         0, 
         0, 
         0,
-        {0,1,2,3,4,5,6}, 
+        {0,1,2,3,4,5}, 
         0,
         0.25f,
         Phase::Opening, 
@@ -56,7 +56,7 @@ void StateMachine::handleUp() {
     }
     if(currentState.phase == Phase::InIdle) {
         currentState.subOptionIndex = std::max(0, currentState.subOptionIndex - 1);
-        if(currentState.subOptionIndex != 0 && currentState.subOptionIndex < currentState.subOptionWindow[0]) {
+        if(currentState.subOptionIndex < currentState.subOptionWindow[0]) {
             currentState.phase = Phase::ShiftUp;
             currentState.time = 0;
         }
@@ -149,6 +149,7 @@ void StateMachine::handleEvent(const SDL_Event& event)
                 currentState.time = 0;
             }
             if (currentState.menu.pages[currentState.pageIndex].options[currentState.optionIndex].type == OptionType::Subpage && currentState.phase == Phase::Idle) {
+                currentState.subOptionWindow = {0,1,2,3,4,5};
                 currentState.phase = Phase::ShiftIn;
                 currentState.time = 0;
             }
@@ -190,13 +191,11 @@ void StateMachine::update(float dt)
         if(currentState.phase == Phase::ShiftUp) {
             currentState.subOptionWindow.pop_back();
             currentState.subOptionWindow.push_front(currentState.subOptionWindow.front() - 1);
-            std::cout << currentState.subOptionWindow[0] << "," << currentState.subOptionWindow[6] << std::endl;
             currentState.phase = Phase::InFadeIn;
         }
         if(currentState.phase == Phase::ShiftDown) {
             currentState.subOptionWindow.pop_front();
             currentState.subOptionWindow.push_back(currentState.subOptionWindow.back() + 1);
-            std::cout << currentState.subOptionWindow[0] << "," << currentState.subOptionWindow[6] << std::endl;
             currentState.phase = Phase::InFadeIn;
         }
         if(currentState.phase == Phase::FadeIn) {
