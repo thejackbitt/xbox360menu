@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/sdl2-ttf-x64-windows-2.22.0-7b52b1c8-b47f-4a81-bb03-56be5ce24e32",
-  "name": "sdl2-ttf:x64-windows@2.22.0 9b1fb09022048a9fc200f52d52d3c7f24234b03d28ce905055c5efb8214deb2f",
+  "documentNamespace": "https://spdx.org/spdxdocs/sdl2-ttf-x64-windows-2.22.0-9dd13a84-e7f5-478a-b139-994591e7ce38",
+  "name": "sdl2-ttf:x64-windows@2.22.0 e9d7e9e01288d36e09012f53537f7e54d50b258a275d2b080ccc0211b4e7ee36",
   "creationInfo": {
     "creators": [
-      "Tool: vcpkg-2026-02-21-82f3841f4f91e8389b7c7ddf61e6733683b2f67b"
+      "Tool: vcpkg-2025-12-16-44bb3ce006467fc13ba37ca099f64077b8bbf84d"
     ],
-    "created": "2026-03-09T03:12:56Z"
+    "created": "2026-05-15T13:11:43Z"
   },
   "relationships": [
     {
@@ -129,7 +129,7 @@
     {
       "name": "sdl2-ttf:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "9b1fb09022048a9fc200f52d52d3c7f24234b03d28ce905055c5efb8214deb2f",
+      "versionInfo": "e9d7e9e01288d36e09012f53537f7e54d50b258a275d2b080ccc0211b4e7ee36",
       "downloadLocation": "NONE",
       "licenseConcluded": "Zlib",
       "licenseDeclared": "NOASSERTION",
@@ -194,7 +194,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "36a7eab452c12c49ea24af88ce6ed43e957e3214b6f4a1408f05cfe1807d70f7"
+          "checksumValue": "9f51b81dd9b4672499aae8957ffc5375951bf7a2244e5131a2919e5febb0596c"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -218,7 +218,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "1d47d66264c88b4d84cf4b119058c254bb8f7a0099dd9a43126ce23853e4d25b"
+          "checksumValue": "c2a4553cb65fbfddf5d737cb22a1779cf4b9b08b4147f8a185f53200110f6a75"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -242,7 +242,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "9a17eb1bf1adcb9ff2c3e2d067b742531b0e33b32e85bf8882c4634979a5824b"
+          "checksumValue": "5bad00ebea5951869c4a5acb14c02b9c30ac558cf27d97497ccc6f32816cfe7f"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -278,7 +278,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "0bae8b901bdbfd9bf2833c9a1989f3a02bd1ea8792252ba269cccd3bee00cee8"
+          "checksumValue": "bda0497037b98e75e1fa1f1b8de82ab57ea5ecf126f62b1ae852d939e55e5db8"
         }
       ],
       "licenseConcluded": "NOASSERTION",
@@ -338,7 +338,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "bae55744d59041eb6de05797ba8b0a9696dde41518b70c5fb7713cd0d112f530"
+          "checksumValue": "e42e3acd7efd54197e50beb35358d1aea38b525d2bbc0832d3d53b132fd65c06"
         }
       ],
       "licenseConcluded": "NOASSERTION",

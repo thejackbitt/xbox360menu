@@ -1,16 +1,20 @@
 Detecting compiler hash for triplet x64-windows...
-Compiler found: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx64/x64/cl.exe
+Compiler found: C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe
 The following packages are already installed:
-  * brotli:x64-windows@1.1.0#1
-  * bzip2[core,tool]:x64-windows@1.0.8#5
-  * freetype[core,zlib,png,bzip2,brotli]:x64-windows@2.13.2
-  * libpng:x64-windows@1.6.43
-    sdl2:x64-windows@2.30.0
-    sdl2-image:x64-windows@2.8.2
-    sdl2-ttf:x64-windows@2.22.0
-  * vcpkg-cmake:x64-windows@2023-05-04
-  * vcpkg-cmake-config:x64-windows@2022-02-06#1
-  * zlib:x64-windows@1.3.1
+  * brotli:x64-windows@1.1.0#1 -- git+https://github.com/microsoft/vcpkg@4e5b5ae1ad26c80535c893cc0307121f0398549e
+  * bzip2[core,tool]:x64-windows@1.0.8#5 -- git+https://github.com/microsoft/vcpkg@92e9a8bbf1abbd89872b48ad82fcf75852de1006
+  * freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.13.2 -- git+https://github.com/microsoft/vcpkg@443f320ccf3139bc1818f0cc273944a56e960d6e
+  * libogg:x64-windows@1.3.5#1 -- git+https://github.com/microsoft/vcpkg@98e27727c32704393494d32615c25b7b16eb3067
+  * libpng:x64-windows@1.6.43 -- git+https://github.com/microsoft/vcpkg@8673cfd41804628ce52c499b8d23c5696104ec47
+  * libvorbis:x64-windows@1.3.7#2 -- git+https://github.com/microsoft/vcpkg@c4c646a26ce3e6ad63992d3e4a55cb185159b23c
+    sdl2:x64-windows@2.30.0 -- git+https://github.com/microsoft/vcpkg@4ab64007873e4e383360819f5227ad0747c649d1
+    sdl2-image:x64-windows@2.8.2 -- git+https://github.com/microsoft/vcpkg@849a6f697c249f583d942ce2ce08ba3e4a9c195c
+    sdl2-mixer:x64-windows@2.8.0#1 -- git+https://github.com/microsoft/vcpkg@b28cae64adf73bec946de9f037724763eb2ef1b2
+    sdl2-ttf:x64-windows@2.22.0 -- git+https://github.com/microsoft/vcpkg@51a85aefcfb3e578904f1cbd72a9f49ff836b928
+  * vcpkg-cmake:x64-windows@2023-05-04 -- git+https://github.com/microsoft/vcpkg@88a7058fc7fa73a9c4c99cfcae9d79e2abf87a5a
+  * vcpkg-cmake-config:x64-windows@2022-02-06#1 -- git+https://github.com/microsoft/vcpkg@8d54cc4f487d51b655abec5f9c9c3f86ca83311f
+  * wavpack:x64-windows@5.6.0#1 -- git+https://github.com/microsoft/vcpkg@d58b3734d0a42c7309216ade0432f7787fbd6ff5
+  * zlib:x64-windows@1.3.1 -- git+https://github.com/microsoft/vcpkg@3f05e04b9aededb96786a911a16193cdb711f0c9
 sdl2 provides CMake targets:
 
     find_package(SDL2 CONFIG REQUIRED)
@@ -25,9 +29,14 @@ sdl2-image provides CMake targets:
     find_package(SDL2_image CONFIG REQUIRED)
     target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
 
+sdl2-mixer provides CMake targets:
+
+    find_package(SDL2_mixer CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL2_mixer::SDL2_mixer>,SDL2_mixer::SDL2_mixer,SDL2_mixer::SDL2_mixer-static>)
+
 sdl2-ttf provides CMake targets:
 
     find_package(SDL2_ttf CONFIG REQUIRED)
     target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>)
 
-All requested installations completed successfully in: 2.44 ms
+All requested installations completed successfully in: 702 us

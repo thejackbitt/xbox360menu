@@ -1,5 +1,7 @@
 #include <deque>
+#include <array>
 #include <SDL.h>
+#include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
 enum class Phase {
@@ -32,6 +34,7 @@ struct MenuState {
 
 struct State {
     Menu menu;
+    std::array<Mix_Chunk*, 6> sounds;
     int pageIndex;
     int optionIndex;
     int subOptionIndex;
@@ -44,13 +47,15 @@ struct State {
 
 class StateMachine {
 public:
-    StateMachine(const Menu& menu);
+    StateMachine(const Menu& menu, const std::array<Mix_Chunk*, 6>& sounds);
 
     void handleLeft();
     void handleRight();
     void handleUp();
     void handleDown();
+    void handleOption();
     void handleSubOption();
+    void handleClose();
 
     void handleEvent(const SDL_Event& event);
     void update(float dt);

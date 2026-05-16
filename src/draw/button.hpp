@@ -1,5 +1,6 @@
 #include "text.hpp"
 #include "icon.hpp"
+#include "dot.hpp"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include "./assets/unchecked_dark.h"
@@ -18,7 +19,8 @@ void drawButton(
     Uint8 opacity,
     const char* text,
     OptionType type,
-    int state
+    int state,
+    std::optional<SDL_Color> colorValue = std::nullopt
 ) {
     const int buttonSize = 10;
     const int borderSize = 5;
@@ -47,7 +49,6 @@ void drawButton(
         currentButtonColor = &buttonColorSelected;
         currentTextColor = &textColorSelected;
     }
-    
 
     if (type == OptionType::Increment || type == OptionType::Decrement || type == OptionType::PointerDisplay) {
         // outline
@@ -74,11 +75,29 @@ void drawButton(
         drawIcon(renderer, buttonX + width - height, buttonY + height/5, height/1.5, height/1.5, checkmarkData, checkmarkLen);
         
         drawText(renderer, textX, textY, width, height, font, 25, currentTextColor, text);
+    } else if(type == OptionType::TeamToggle) {
+        // outline
+        drawOpaqueRect(renderer, borderX, borderY, borderW, borderH, borderColor);
+        // button
+        drawOpaqueRect(renderer, buttonX, buttonY, width, height, currentButtonColor);
+
+        
+        if(state == 0) {
+            drawDot(renderer, textX + width/3, textY + height/2, height/4, {212, 44, 44, opacity});
+            drawText(renderer, textX, textY, width, height, font, 25, currentTextColor, "Red Team");
+        } else {
+            drawDot(renderer, textX + width/3, textY + height/2, height/4, {44, 78, 212, opacity});
+            drawText(renderer, textX, textY, width, height, font, 25, currentTextColor, "Blue Team");
+        }
     } else {
         // outline
         drawOpaqueRect(renderer, borderX, borderY, borderW, borderH, borderColor);
         // button
         drawOpaqueRect(renderer, buttonX, buttonY, width, height, currentButtonColor);
+
+        if(colorValue.has_value()) {
+            drawDot(renderer, textX + width/4, textY + height/2, height/4, colorValue.value());
+        }
         
         drawText(renderer, textX, textY, width, height, font, 25, currentTextColor, text);
     }

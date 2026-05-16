@@ -2,6 +2,7 @@
 #include "draw/button.hpp"
 #include "draw/page.hpp"
 #include "draw/icon.hpp"
+#include "assets/colors.h"
 #include "assets/mccIcon.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -82,15 +83,9 @@ void renderMenu(
         if(state.phase == Phase::ShiftOut) {
             offset = -updateSize * (alpha) + updateSize;
         }
-        // assuming subOptionWindow is 3
-        // at frame 0, buttonOffset should be 100 and transitions to 150 when alpha is 1
-        // 150 * (0+x) = 100
-        // 150 * (1+x) = 150
         if(state.phase == Phase::ShiftUp) {
             buttonOffset = (((buttonSize*state.subOptionWindow[0]) * -1)) + (buttonSize * alpha);
         }
-        // assuming subOptionWindow is 3
-        // at frame 0, buttonOffset should be 200 and transitions to 150 when alpha is 1
         if(state.phase == Phase::ShiftDown) {
             buttonOffset = (((buttonSize*state.subOptionWindow[0]) * -1)) - (buttonSize * alpha);
         }
@@ -113,7 +108,11 @@ void renderMenu(
         // rendering the accents
         drawIcon(renderer, menuPosX + (menuWidth-iconSize), menuPosY - iconSize - 10, iconSize, iconSize, mccIcon_png, mccIcon_png_len);
         drawText(renderer, menuPosX - (menuWidth/2) + 10, menuPosY - 190, menuWidth, menuHeight, font, 25, {255, 255, 255, 255}, "MCC Guide");
-        drawPage(renderer, menuPosX, menuPosY, menuWidth, menuHeight, state.menu.pages[state.pageIndex].label.data(), true, globalAlpha, font);
+        if(state.phase == Phase::InIdle || state.phase == Phase::InFadeIn || state.phase == Phase::ShiftOut || state.phase == Phase::ShiftUp || state.phase == Phase::ShiftDown) {
+            drawPage(renderer, menuPosX, menuPosY, menuWidth, menuHeight, state.menu.pages[state.pageIndex].options[state.optionIndex].label.data(), true, globalAlpha, font, 25.00f);
+        } else {
+            drawPage(renderer, menuPosX, menuPosY, menuWidth, menuHeight, state.menu.pages[state.pageIndex].label.data(), true, globalAlpha, font);
+        }
     }
     // rendering the right pages
     if(state.phase != Phase::Closing && state.phase != Phase::Opening && state.pageIndex <= pageCount - 1) {
@@ -185,6 +184,60 @@ void renderMenu(
                     state.menuState.useKM ? 1: 0
                 );
                 buttonCount++;
+            } else if (type == OptionType::TeamToggle) {
+                drawButton(
+                    renderer, 
+                    menuPosX, 
+                    menuPosY + buttonCount*buttonSize, 
+                    menuWidth, 
+                    menuHeight,
+                    font, 
+                    state.optionIndex == i,
+                    globalAlpha,
+                    state.menu.pages[state.pageIndex].options[i].label.c_str(),
+                    type,
+                    state.menuState.teamIndex[state.pageIndex - 1]
+                );
+                buttonCount++;
+            } else if (type == OptionType::Subpage) {
+                // checks if this option is a color type
+                if (state.menu.pages[state.pageIndex].options[i].subOptionType > 0) {
+                    // get the index of the player color from the player index
+                    int colorIndex = state.menuState.playerColors[state.pageIndex - 1].colors[state.menu.pages[state.pageIndex].options[i].subOptionType - 1];
+                    SDL_Color color = defaultColors[colorIndex];
+                    SDL_Color finalColor = {color.r, color.g, color.b, globalAlpha};
+                    drawButton(
+                        renderer, 
+                        menuPosX, 
+                        menuPosY + buttonCount*buttonSize, 
+                        menuWidth, 
+                        menuHeight,
+                        font, 
+                        state.optionIndex == i,
+                        globalAlpha,
+                        state.menu.pages[state.pageIndex].options[i].label.c_str(),
+                        type,
+                        0,
+                        finalColor
+                    );
+                    buttonCount++;
+                } else {
+                    // if not a color type, its a controller type
+                    drawButton(
+                        renderer, 
+                        menuPosX, 
+                        menuPosY + buttonCount*buttonSize, 
+                        menuWidth, 
+                        menuHeight,
+                        font, 
+                        state.optionIndex == i,
+                        globalAlpha,
+                        state.menu.pages[state.pageIndex].options[i].subOptions[state.menuState.controllerIndex[state.pageIndex - 1]].label.c_str(),
+                        type,
+                        0
+                    );
+                    buttonCount++;
+                }
             } else {
                 drawButton(
                     renderer, 
@@ -204,6 +257,8 @@ void renderMenu(
         }
     }
     // sub states (sub pages)
+    SDL_Rect clipRect = { menuPosX, menuPosY, menuWidth, menuHeight };
+    SDL_RenderSetClipRect(renderer, &clipRect);
     if(state.phase == Phase::InIdle || state.phase == Phase::InFadeIn || state.phase == Phase::ShiftOut || state.phase == Phase::ShiftUp || state.phase == Phase::ShiftDown) {
         float buttonCount = 0.0f;
         for(int i = 0; i < state.menu.pages[state.pageIndex].options[state.optionIndex].subOptions.size(); i++) {
@@ -219,9 +274,11 @@ void renderMenu(
                 globalAlpha,
                 state.menu.pages[state.pageIndex].options[state.optionIndex].subOptions[i].label.c_str(),
                 type,
-                0
+                0,
+                state.menu.pages[state.pageIndex].options[state.optionIndex].subOptions[i].colorValue
             );
             buttonCount++;
         }
     }
+    SDL_RenderSetClipRect(renderer, nullptr);
 }
