@@ -1,3 +1,0 @@
-C:/Users/jackb/Repositories/xbox360menu/build/CMakeFiles/XboxUIPrototype.dir
-C:/Users/jackb/Repositories/xbox360menu/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/jackb/Repositories/xbox360menu/build/CMakeFiles/ZERO_CHECK.dir

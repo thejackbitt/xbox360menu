@@ -15,10 +15,10 @@
 int main(int argc, char* argv[])
 {
 
-    // int WINDOW_WIDTH = 1080;
-    // int WINDOW_HEIGHT = 720;
-    int WINDOW_WIDTH = 1620;
-    int WINDOW_HEIGHT = 1080;
+    int WINDOW_WIDTH = 1080;
+    int WINDOW_HEIGHT = 720;
+    // int WINDOW_WIDTH = 1620;
+    // int WINDOW_HEIGHT = 1080;
 
     // begin init renderer
     
