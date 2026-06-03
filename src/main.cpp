@@ -115,6 +115,10 @@ int main(int argc, char* argv[])
     Mix_PlayChannel(-1, sounds[0], 0);
     const Menu menuInstance;
     StateMachine stateMachine(menuInstance, sounds);
+    const std::string savePath = "menu_state.bin";
+    if (loadMenuStateBin(stateMachine.getState().menuState, savePath)) {
+        std::cout << "Loaded menu state from " << savePath << std::endl;
+    }
     SDL_Event event;
 
     // end setup
@@ -126,6 +130,20 @@ int main(int argc, char* argv[])
 
     while (stateMachine.isRunning()) {
         while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_KEYDOWN) {
+                if (event.key.keysym.sym == SDLK_s) {
+                    if (saveMenuStateBin(stateMachine.getState().menuState, savePath)) {
+                        std::cout << "Saved menu state to " << savePath << std::endl;
+                    }
+                    continue;
+                }
+                if (event.key.keysym.sym == SDLK_l) {
+                    if (loadMenuStateBin(stateMachine.getState().menuState, savePath)) {
+                        std::cout << "Loaded menu state from " << savePath << std::endl;
+                    }
+                    continue;
+                }
+            }
             stateMachine.handleEvent(event);
         }
 
@@ -141,6 +159,8 @@ int main(int argc, char* argv[])
     }
 
     // on exit
+    saveMenuStateBin(stateMachine.getState().menuState, savePath);
+
     if (controller) {
         SDL_GameControllerClose(controller);
     }

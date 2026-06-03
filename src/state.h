@@ -1,5 +1,6 @@
 #include <deque>
 #include <array>
+#include <string>
 #include <SDL.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
@@ -44,6 +45,9 @@ struct State {
     Phase phase;
     MenuState menuState;
 };
+
+bool saveMenuStateBin(const MenuState& state, const std::string& path);
+bool loadMenuStateBin(MenuState& state, const std::string& path);
 
 class StateMachine {
 public:
